@@ -5,7 +5,6 @@ import com.example.unimap.jsonConvertor.Convertor;
 import com.example.unimap.service.MinimalPathService;
 import com.example.unimap.service.PythonService;
 import com.example.unimap.service.StaffRoomService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,6 @@ public class GaniviController {
     private final MinimalPathService minPathService;
     private final StaffRoomService staffService;
 
-    @Autowired
     private GaniviController(MinimalPathService minPathService, StaffRoomService staffService) {
         this.minPathService = minPathService;
         this.staffService = staffService;

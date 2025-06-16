@@ -1,6 +1,5 @@
 package com.example.unimap.jsonConvertor.toJson;
 
-import com.example.unimap.jsonConvertor.toJson.Subject;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
