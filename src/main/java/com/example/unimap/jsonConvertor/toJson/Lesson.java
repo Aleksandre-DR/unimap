@@ -11,8 +11,6 @@ public class Lesson {
     private String lecturer;
     @SerializedName("აუდიტორია")
     private String auditorium;
-    @SerializedName("დღე")
-    private String day;
     @SerializedName("დრო")
     private String time;
 }

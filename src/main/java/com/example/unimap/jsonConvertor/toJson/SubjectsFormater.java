@@ -3,15 +3,27 @@ package com.example.unimap.jsonConvertor.toJson;
 import com.example.unimap.jsonConvertor.fromJson.SubjectFromJson;
 import com.example.unimap.jsonConvertor.fromJson.SubjectsFromJson;
 
-public class ClearSubjectsCreator {
-    private static Subjects subjects = new Subjects();
+import java.time.LocalDate;
+
+import static com.example.unimap.service.Translator.weekdaysFromEngToGeo;
+
+public class SubjectsFormater {
+    private static Subjects subjects;
 
     private static String subjectName;
     private static String lecture;
     private static String workerSquad;
     private static String lab;
 
-    public static Subjects create(SubjectsFromJson subsFromJson) {
+    private static String todayInEng;
+    private static String todayInGeo;
+
+    private static String lecturer, auditorium, day, time;
+
+    public static Subjects formate(SubjectsFromJson subsFromJson) {
+        subjects = new Subjects();
+        todayInEng = LocalDate.now().getDayOfWeek().toString();
+        todayInGeo = weekdaysFromEngToGeo.get(todayInEng);
 
         for (SubjectFromJson sub : subsFromJson.getSubjects()) {
             retrieveSubjectInfo(sub);
@@ -19,7 +31,9 @@ public class ClearSubjectsCreator {
             subject.addLesson(createLesson("ლექცია", lecture));
             subject.addLesson(createLesson("სამუშაო ჯგუფი", workerSquad));
             subject.addLesson(createLesson("ლაბორატორიული", lab));
-            subjects.addSubject(subject);
+            if (!subject.isLessonsEmpty()) {
+                subjects.addSubject(subject);
+            }
         }
 
         return subjects;
@@ -33,8 +47,6 @@ public class ClearSubjectsCreator {
     }
 
     private static Lesson createLesson(String lessonType, String lessonAsStr) {
-        String lecturer, auditorium, day, time;
-
         if (lessonAsStr.isEmpty()) {
             return null;
         }
@@ -43,7 +55,11 @@ public class ClearSubjectsCreator {
         auditorium = lessonAsStr.substring(lessonAsStr.indexOf("სართული") + 8, lessonAsStr.indexOf("\nთარიღი"));
         day = lessonAsStr.substring(lessonAsStr.indexOf("დრო") + 5, lessonAsStr.lastIndexOf(", "));
         time = lessonAsStr.substring(lessonAsStr.lastIndexOf(", ") + 2);
-        return new Lesson(lessonType, lecturer, auditorium, day, time);
+
+        if (!day.equals(todayInGeo)) {
+            return null;
+        }
+        return new Lesson(lessonType, lecturer, auditorium, time);
     }
 }
 

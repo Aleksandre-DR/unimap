@@ -16,9 +16,11 @@ public class Subject {
     }
 
     public void addLesson(Lesson lesson) {
-        if (lesson == null) {
-            return;
-        }
+        if (lesson == null) return;
         lessons.add(lesson);
+    }
+
+    public boolean isLessonsEmpty() {
+        return lessons.isEmpty();
     }
 }
