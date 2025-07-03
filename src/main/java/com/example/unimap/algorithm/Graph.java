@@ -66,7 +66,7 @@ public class Graph {
     }
 
     private static void addAllEdges() {
-        try (InputStream inputStream = Graph.class.getClassLoader().getResourceAsStream("edges.txt")) {
+        try (InputStream inputStream = Graph.class.getResourceAsStream("/edges.txt")) {
             if (inputStream == null) {
                 System.err.println("edges.txt not found in resources.");
                 return;

@@ -48,7 +48,7 @@ public class StaffRoomService {
     private void fillStaffRoomTable() {
         if (staffRepo.count() > 0) return;
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("staffRooms.txt")) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/staffRooms.txt")) {
             if (inputStream == null) {
                 System.err.println("staffRooms.txt not found in resources.");
                 return;

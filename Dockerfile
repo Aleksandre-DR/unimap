@@ -5,8 +5,7 @@ WORKDIR /app
 
 # Copy only the necessary files for Maven build
 COPY pom.xml .
-COPY src/main/java src/main/java
-COPY src/main/resources src/main/resources
+COPY src ./src
 
 # Build JAR
 RUN mvn clean package -DskipTests
@@ -50,7 +49,6 @@ RUN pip install -r /app/py/requirements.txt
 
 # Copy the built jar from builder stage
 COPY --from=builder /app/target/unimap-0.0.1-SNAPSHOT.jar app.jar
-
 # Expose port
 EXPOSE 8080
 
