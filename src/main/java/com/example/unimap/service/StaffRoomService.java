@@ -32,16 +32,36 @@ public class StaffRoomService {
     }
 
     public String findStaffRoom(String staffFullName) {
-        if (georgianToLatin.keySet().contains(staffFullName.charAt(0))) {
-            staffFullName = Translator.translator(staffFullName);     // converts into latin
+        if (staffFullName == null || staffFullName.length() == 0) {
+            throw new ResourceNotFoundException("staff name must not be null or empty");
         }
-        staffFullName = findClosestName(staffFullName.toLowerCase());
-        String staffRoom = getStaffRoom(staffFullName);
+
+        String ourStaffFullName = staffFullName;
+        if (georgianToLatin.keySet().contains(staffFullName.charAt(0))) {
+            ourStaffFullName = Translator.translator(staffFullName);     // converts into latin
+        }
+
+        ourStaffFullName = findClosestName(ourStaffFullName.toLowerCase());
+        String staffRoom = getStaffRoom(ourStaffFullName);
+
+        if (staffRoom == null) {
+            ourStaffFullName = inverseStaffName(ourStaffFullName);
+            ourStaffFullName = findClosestName(ourStaffFullName.toLowerCase());
+            staffRoom = getStaffRoom(ourStaffFullName);
+        }
 
         if (staffRoom == null) {
             throw new ResourceNotFoundException("No staff member found with name: " + staffFullName);
         }
         return staffRoom;
+    }
+
+    private static String inverseStaffName(String ourStaffFullName) {
+        String[] nameAndSurname = ourStaffFullName.split(" ");
+        if (nameAndSurname.length == 1) {       // no har has found
+            return ourStaffFullName;
+        }
+        return nameAndSurname[1] + " " + nameAndSurname[0];
     }
 
 
