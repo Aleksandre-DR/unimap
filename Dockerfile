@@ -20,13 +20,9 @@ WORKDIR /app
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y wget curl unzip gnupg python3 python3-pip python3-venv fonts-liberation && \
+    apt-get install -y wget curl unzip gnupg fonts-liberation && \
     apt-get clean
 
-# Set up Python venv
-RUN python3 -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-RUN pip install --upgrade pip
 
 
 # Install matching ChromeDriver version 114.0.5735.90
@@ -40,11 +36,6 @@ RUN wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/1
     unzip /tmp/chromedriver.zip -d /usr/local/bin && \
     chmod +x /usr/local/bin/chromedriver && \
     rm /tmp/chromedriver.zip
-
-# Copy and install Python dependencies
-COPY src/main/py /app/py
-RUN pip install -r /app/py/requirements.txt
-
 
 
 # Copy the built jar from builder stage

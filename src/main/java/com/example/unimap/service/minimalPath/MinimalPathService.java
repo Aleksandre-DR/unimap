@@ -1,6 +1,5 @@
-package com.example.unimap.service;
+package com.example.unimap.service.minimalPath;
 
-import com.example.unimap.algorithm.Graph;
 import com.example.unimap.dto.PathResponse;
 import com.example.unimap.entity.MinimalPath;
 import com.example.unimap.exception.InvalidInputException;
@@ -32,7 +31,6 @@ public class MinimalPathService {
             throw new InvalidInputException("End room cannot be empty.");
 
         String minimalPath;
-        minimalPath = getMinimalPath(start + " -> " + end);
 
         minimalPath = getMinimalPath(start + " -> " + end);
         if (minimalPath != null) {
@@ -70,6 +68,6 @@ public class MinimalPathService {
         int cost = Integer.parseInt(strCost);
         String minPathWithoutCost = minPath.substring(0, lastArrowIndex);
 
-        return new PathResponse(minPathWithoutCost, cost, "Path found successfully");
+        return new PathResponse(minPathWithoutCost, cost);
     }
 }

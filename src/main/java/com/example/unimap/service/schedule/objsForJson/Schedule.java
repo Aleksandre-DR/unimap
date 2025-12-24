@@ -1,14 +1,14 @@
-package com.example.unimap.jsonConvertor.toJson;
+package com.example.unimap.service.schedule.objsForJson;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class Subjects {
+public class Schedule {
     @SerializedName("საგნები")
     private ArrayList<Subject> subjects;
 
-    public Subjects() {
+    public Schedule() {
         this.subjects = new ArrayList<>();
     }
 

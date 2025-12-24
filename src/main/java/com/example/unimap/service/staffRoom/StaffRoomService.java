@@ -1,4 +1,4 @@
-package com.example.unimap.service;
+package com.example.unimap.service.staffRoom;
 
 import com.example.unimap.entity.StaffRoom;
 import com.example.unimap.exception.ResourceNotFoundException;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
-import static com.example.unimap.service.Translator.georgianToLatin;
+import static com.example.unimap.service.staffRoom.Translator.georgianToLatin;
 
 @Service
 public class StaffRoomService {
@@ -38,7 +38,7 @@ public class StaffRoomService {
 
         String ourStaffFullName = staffFullName;
         if (georgianToLatin.keySet().contains(staffFullName.charAt(0))) {
-            ourStaffFullName = Translator.translator(staffFullName);     // converts into latin
+            ourStaffFullName = Translator.translate(staffFullName);     // converts into latin
         }
 
         ourStaffFullName = findClosestName(ourStaffFullName.toLowerCase());

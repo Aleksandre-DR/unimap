@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
     @ExceptionHandler(InvalidInputException.class)
     public ResponseEntity<String> handleInvalidInput(InvalidInputException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
@@ -17,11 +16,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    }
-
-    @ExceptionHandler(ExternalProcessException.class)
-    public ResponseEntity<String> handleExternalError(ExternalProcessException ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Python error: " + ex.getMessage());
     }
 
     @ExceptionHandler(Exception.class)

@@ -1,4 +1,4 @@
-package com.example.unimap.algorithm;
+package com.example.unimap.service.minimalPath;
 
 
 import java.io.IOException;
@@ -7,31 +7,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-
-class Edge {
-    private final String startVertex;
-    private final String endVertex;
-    private final double edgeWeight;
-
-    Edge(String startVertex, String endVertex, double edgeWeight) {
-        this.startVertex = startVertex;
-        this.endVertex = endVertex;
-        this.edgeWeight = edgeWeight;
-    }
-
-    public String getStartVertex() {
-        return startVertex;
-    }
-
-    public String getEndVertex() {
-        return endVertex;
-    }
-
-    public double getWeight() {
-        return edgeWeight;
-    }
-}
-
 
 public class Graph {
     private static ArrayList<Edge> edges = new ArrayList<>();
@@ -45,20 +20,6 @@ public class Graph {
     }
 
     private Graph() {
-    }
-
-    private static void addEdge(String startVertex, String endVertex, double edgeWeight) {
-        edges.add(new Edge(startVertex, endVertex, edgeWeight));
-        edges.add(new Edge(endVertex, startVertex, edgeWeight));
-        addDistinctVertex(startVertex);
-        addDistinctVertex(endVertex);
-    }
-
-    private static void addDistinctVertex(String vertex) {
-        if (!distinctVertexes.contains(vertex)) {
-            distinctVertexes.add(vertex);
-            graphSize++;
-        }
     }
 
     public static String minPathBetweenPoints(String source, String finish) {
@@ -84,4 +45,17 @@ public class Graph {
         }
     }
 
+    private static void addEdge(String startVertex, String endVertex, double edgeWeight) {
+        edges.add(new Edge(startVertex, endVertex, edgeWeight));
+        edges.add(new Edge(endVertex, startVertex, edgeWeight));
+        addDistinctVertex(startVertex);
+        addDistinctVertex(endVertex);
+    }
+
+    private static void addDistinctVertex(String vertex) {
+        if (!distinctVertexes.contains(vertex)) {
+            distinctVertexes.add(vertex);
+            graphSize++;
+        }
+    }
 }

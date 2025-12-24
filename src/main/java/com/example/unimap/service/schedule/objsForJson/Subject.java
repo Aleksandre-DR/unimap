@@ -1,4 +1,4 @@
-package com.example.unimap.jsonConvertor.toJson;
+package com.example.unimap.service.schedule.objsForJson;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -15,12 +15,7 @@ public class Subject {
         lessons = new ArrayList<>();
     }
 
-    public void addLesson(Lesson lesson) {
-        if (lesson == null) return;
-        lessons.add(lesson);
-    }
-
-    public boolean isLessonsEmpty() {
-        return lessons.isEmpty();
+    public void addLessons(ArrayList<Lesson> lessonsList) {
+        lessonsList.forEach(lesson -> lessons.add(lesson));
     }
 }

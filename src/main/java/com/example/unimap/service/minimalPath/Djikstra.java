@@ -1,4 +1,5 @@
-package com.example.unimap.algorithm;
+package com.example.unimap.service.minimalPath;
+
 import java.util.*;
 
 public class Djikstra {
@@ -51,7 +52,7 @@ public class Djikstra {
             endV = realRoomToOur.get(edge.getEndVertex());
 
             addAdj(startV, endV);
-            edgeWeight[startV][endV] = edge.getWeight();
+            edgeWeight[startV][endV] = edge.getEdgeWeight();
         }
     }
 

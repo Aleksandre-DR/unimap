@@ -8,5 +8,4 @@ import lombok.Getter;
 public class PathResponse {
     private String path;
     private int cost;
-    private String message;
 }
